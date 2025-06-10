@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Published Papers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #ffffff;
+            animation: fadeIn 1s ease;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+
+        thead {
+            background-color: #e3eaf2;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #fdfdfd;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f6f9fc;
+        }
+
+        tbody tr:hover {
+            background-color: #dfefff;
+            transition: background-color 0.3s ease;
+        }
+
+        th {
+            font-weight: 600;
+            color: #2a2a2a;
+        }
+
+        td {
+            color: #444;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.1em;
+            color: #666;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar {
+            background-color: #1e293b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+            transform: translateY(-3px);
+        }
+
+        .nav-links a.active {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .user-profile {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .user-profile i {
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        .user-profile:hover {
+            color: #60a5fa;
+        }
+
+        .see-author-btn {
+            background-color: #3b82f6;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .see-author-btn:hover {
+            background-color: #2563eb;
+        }
+
+        @media screen and (max-width: 600px) {
+            .nav-links a {
+                margin: 0 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="/mainpage">Home</a>
+            <a href="/all_journals">List Publications</a>
+            <a href="/publishers">Publisher</a>
+            <a href="/published_papers" class="active">Published Papers</a>
+        </div>
+
+        {% if username %}
+        <div class="user-profile">
+            <a href="/profile" style="display: flex; align-items: center; color: white; text-decoration: none;">
+                <i class="fas fa-user-circle" style="color: white; margin-right: 8px;"></i>
+                <span><strong>{{ username }}</strong></span>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <h1>Published Papers</h1>
+
+    {% if papers %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Journal ISSN</th>
+                <th>Journal Name</th>
+                <th>Publisher</th>
+                <th>Paper Title</th>
+                <th>Published Year</th>
+                <th>Volume</th>
+                <th>Issue</th>
+                
+                
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paper in papers %}
+            <tr>
+                <td>{{ paper.p_id }}</td>
+                <td>{{ paper.issn }}</td>
+                <td>{{ paper.journal_name }}</td>
+                 <td>{{ paper.publisher }}</td>
+                <td>{{ paper.paper_title }}</td>
+                <td>{{ paper.published_year }}</td>
+                <td>{{ paper.volume }}</td>
+                <td>{{ paper.issue }}%</td>
+               
+               
+                <td>
+                    <a href="/paper/{{ paper.p_id }}/authors" class="see-author-btn">Author</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No published papers found.</p>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Paper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #b1d4e0, #d9d9d9);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #444;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="year"],
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #66b3ff;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #3385ff;
+        }
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Paper Information</h2>
+        <form action="http://localhost:5000/add_paper" method="post">
+            <label for="paper_title">Paper Title:</label>
+            <input type="text" id="paper_title" name="paper_title" required>
+
+            <label for="publisher">Publisher:</label>
+            <input type="text" id="publisher" name="publisher" required>
+
+            <label for="issn">ISSN:</label>
+            <input type="text" id="issn" name="issn">
+
+            <label for="published_year">Published Year:</label>
+            <input type="number" id="published_year" name="published_year" min="1900" max="2099" required>
+
+            <label for="volume">Volume:</label>
+            <input type="text" id="volume" name="volume">
+
+            <label for="issue">Issue:</label>
+            <input type="text" id="issue" name="issue">
+
+            <label for="journal_name">Journal Name:</label>
+            <input type="text" id="journal_name" name="journal_name">
+
+            <input type="submit" value="Add Paper">
+        </form>
+    </div>
+</body>
+</html>

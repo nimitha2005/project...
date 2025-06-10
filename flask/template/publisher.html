@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publisher Table</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #1e293b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+            transform: translateY(-3px);
+        }
+
+        .nav-links a.active {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .user-profile {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .user-profile i {
+            font-size: 20px;
+            color: #ffffff;
+        }
+
+        .user-profile:hover {
+            color: #60a5fa;
+        }
+
+        .content {
+            text-align: center;
+            padding: 60px 20px 30px;
+        }
+
+        .content h1 {
+            font-size: 3em;
+            color: #1e3a8a;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .button-container button {
+            background: linear-gradient(to right, #3b82f6, #6366f1);
+            color: white;
+            padding: 14px 28px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease, box-shadow 0.3s;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-container button:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Search Box */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .search-box {
+            padding: 14px;
+            font-size: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            width: 350px;
+            transition: border 0.3s ease;
+        }
+
+        .search-box:focus {
+            border: 1px solid #3498db;
+            outline: none;
+        }
+
+        .search-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .search-tabs button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        .search-tabs button.active {
+            background-color: #2980b9;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #f1f1f1;
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                width: 90%;
+                margin: 10px;
+            }
+
+            th, td {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .search-box {
+                width: 280px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            table {
+                width: 100%;
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 6px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Page Header */
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Text Styling for 'No data' */
+        .no-data {
+            font-size: 1.2rem;
+            color: #777;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+    </style>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="nav-links">
+          <a href="/mainpage" class="active">Home</a>
+          <a href="/all_journals">List Publications</a>
+          <a href="/publishers">Publisher</a>
+        </div>
+      
+        {% if username %}
+        <div class="user-profile">
+          <a href="/profile" style="display: flex; align-items: center; color: white; text-decoration: none;">
+            <i class="fas fa-user-circle" style="color: white; margin-right: 8px;"></i>
+            <span> <strong>{{ username }}</strong></span>
+          </a>
+        </div>
+        {% endif %}
+      </div>
+      
+    <!-- Search Tabs -->
+    <div class="search-tabs">
+        <button id="searchJournalTab" class="active" onclick="toggleSearchMode('journal')">Search by Journal</button>
+        <button id="searchPublisherTab" onclick="toggleSearchMode('publisher')">Search by Publisher</button>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search..." onkeyup="search()">
+    </div>
+
+    <h1>Publisher Information</h1>
+
+    {% if publishers %}
+    <table id="publisherTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ISSN</th>
+                <th>Journal Name</th>
+                <th>Publisher Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Office Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for publisher in publishers %}
+            <tr class="publisher-row">
+                <td>{{ publisher.id }}</td>
+                <td>{{ publisher.issn }}</td>
+                <td>{{ publisher.journal_name }}</td>
+                <td>{{ publisher.publisher_name }}</td>
+                <td>{{ publisher.email }}</td>
+                <td>{{ publisher.contact_number }}</td>
+                <td>{{ publisher.office_address }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-data">No data available.</p>
+    {% endif %}
+
+    <script>
+        // Toggle between "Search by Journal" and "Search by Publisher"
+        let currentSearchMode = 'journal';
+
+        function toggleSearchMode(mode) {
+            currentSearchMode = mode;
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = ''; // Clear search field
+            if (mode === 'journal') {
+                document.getElementById('searchJournalTab').classList.add('active');
+                document.getElementById('searchPublisherTab').classList.remove('active');
+                searchInput.placeholder = "Search by Journal...";
+            } else {
+                document.getElementById('searchPublisherTab').classList.add('active');
+                document.getElementById('searchJournalTab').classList.remove('active');
+                searchInput.placeholder = "Search by Publisher...";
+            }
+        }
+
+        // Function to search based on current mode (journal or publisher)
+        function search() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("publisherTable");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                let searchValue = '';
+
+                if (currentSearchMode === 'journal') {
+                    searchValue = cells[2].textContent.toLowerCase(); // Journal Name
+                } else {
+                    searchValue = cells[3].textContent.toLowerCase(); // Publisher Name
+                }
+
+                if (searchValue.includes(filter)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

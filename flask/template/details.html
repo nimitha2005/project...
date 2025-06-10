@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ journal.jname }} - Details</title>
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            color: #1f2937;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .details-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #2563eb;
+        }
+
+        .info {
+            line-height: 1.8;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{{ journal.jname }} - Journal Details</h1>
+
+    <div class="details-container">
+        <div class="section">
+            <h2>Journal Information</h2>
+            <div class="info">
+                <p><span class="label">ISSN:</span> {{ journal.issn }}</p>
+                <p><span class="label">Payment:</span> {{ journal.payment }}</p>
+                <p><span class="label">Fee:</span> {{ journal.fee }}</p>
+                <p><span class="label">Frequency:</span> {{ journal.frequency }}</p>
+                <p><span class="label">Scopus Indexed:</span> {{ journal.scopus_index }}</p>
+                <p><span class="label">WOS Indexed:</span> {{ journal.wos_index }}</p>
+                <p><span class="label">Quality:</span> {{ journal.quality }}</p>
+                <p><span class="label">Country:</span> {{ journal.country }}</p>
+                <p><span class="label">Impact Factor:</span> {{ journal.impact_factor }}</p>
+            </div>
+        </div>
+
+        {% if publisher %}
+<div class="section">
+    <h2>Publisher Information</h2>
+    <div class="info">
+        <p><span class="label">Publisher Name:</span> {{ publisher.publisher_name }}</p>
+        <p><span class="label">Email:</span> {{ publisher.email }}</p>
+        <p><span class="label">Contact Number:</span> {{ publisher.contact_number }}</p>
+        <p><span class="label">Office Address:</span> {{ publisher.office_address }}</p>
+    </div>
+</div>
+{% endif %}
+
+
+        <a href="/all_journals" class="back-link">← Back to All Journals</a>
+    </div>
+
+</body>
+</html>

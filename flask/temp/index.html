@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Journal Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Add the background-clip property for compatibility */
+h1 {
+  font-size: 3em;
+  color: #1e3a8a;
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  /* Apply background-clip for better compatibility */
+  background: linear-gradient(to right, #60a5fa, #3b82f6);
+  -webkit-background-clip: text; /* For Safari/Chrome */
+  background-clip: text; /* Standard property */
+  color: transparent;
+}
+
+
+    body {
+      background: linear-gradient(to right, #c6d5e6, #dbeafe);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    .content {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    .content h1 {
+      font-size: 3em;
+      color: #1e3a8a;
+      margin-bottom: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, #60a5fa, #3b82f6);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .button-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      justify-items: center;
+      align-items: center;
+      grid-template-rows: repeat(3, auto);
+      margin-top: 40px;
+    }
+
+    .button-container button {
+      background: linear-gradient(to right, #3b82f6, #6366f1);
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.4s ease, transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    .button-container button:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-container button:active {
+      transform: scale(1) translateY(0);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @media screen and (max-width: 600px) {
+      .content h1 {
+        font-size: 2.4em;
+      }
+
+      .button-container button {
+        width: 80%;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <h1>Journal Management System</h1>
+
+    <div class="button-container">
+      <button onclick="window.location.href='/delete'">Delete Journal</button>
+      <button onclick="window.location.href='/addjournal'">Add Journal</button>
+      <button onclick="window.location.href='/add_publisher'">Add Publisher</button>
+      <button onclick="window.location.href='/add_paper'">Add Publications</button>
+      <button onclick="window.location.href='/delete_paper'">delete Publications</button>
+      <button onclick="window.location.href='/logout'">Logout</button>
+
+    </div>
+  </div>
+
+</body>
+</html>

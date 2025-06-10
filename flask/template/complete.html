@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Complete Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #c6d5e6, #dbeafe);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .profile-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      padding: 40px;
+      text-align: center;
+      border: 1px solid #4e65c2;
+    }
+
+    h2 {
+      color: #1e3a8a;
+      font-size: 2.4em;
+      margin-bottom: 20px;
+      font-weight: 600;
+      background: linear-gradient(to right, #60a5fa, #3b82f6);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      background-color: #fafafa;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #60a5fa;
+      outline: none;
+      background-color: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      background: linear-gradient(to right, #3b82f6, #6366f1);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #6366f1, #3b82f6);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group select {
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+      .profile-container {
+        padding: 30px 20px;
+      }
+
+      h2 {
+        font-size: 1.8em;
+      }
+
+      input,
+      select,
+      button {
+        padding: 12px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <h2>Complete Your Profile</h2>
+    <form action="/complete_profile" method="POST">
+      <div class="form-group">
+        <input type="text" name="first_name" placeholder="First Name" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="last_name" placeholder="Last Name" required>
+      </div>
+      <div class="form-group">
+        <select name="profession" required>
+          <option value="student">Student</option>
+          <option value="professor">Professor</option>
+          <option value="research_scholar">Research Scholar</option>
+          <option value="working_professional">Working Professional</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="text" name="district" placeholder="District" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="state" placeholder="State" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="country" placeholder="Country" required>
+      </div>
+      <button type="submit">Save Profile</button>
+    </form>
+  </div>
+
+</body>
+</html>

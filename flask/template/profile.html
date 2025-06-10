@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8fafc;
+      color: #333;
+    }
+
+    .page-wrapper {
+      padding: 40px 60px;
+      animation: fadeIn 0.7s ease;
+    }
+
+    /* Top left navigation tabs */
+    .top-tabs {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .top-tabs a {
+      text-decoration: none;
+      color: #1d4ed8;
+      background-color: #e0f2fe;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .top-tabs a:hover {
+      background-color: #bae6fd;
+      transform: translateY(-1px);
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .profile-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .profile-header i {
+      font-size: 48px;
+      color: #60a5fa;
+    }
+
+    .profile-details p {
+      font-size: 16px;
+      margin-bottom: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #e2e8f0;
+      transition: background-color 0.3s ease;
+    }
+
+    .profile-details p:hover {
+      background-color: #f1f5f9;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      display: inline-block;
+      margin-right: 15px;
+      padding: 10px 20px;
+      background-color: #60a5fa;
+      color: white;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .buttons a:hover {
+      background-color: #3b82f6;
+      transform: translateY(-2px);
+    }
+
+    .tab-links {
+      margin-top: 40px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 20px;
+    }
+
+    .tab-link {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e3a8a;
+      margin-right: 20px;
+      background-color: #e0f2fe;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .tab-link:hover {
+      background-color: #bae6fd;
+    }
+
+    .tab-content {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-content ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .tab-content li {
+      background-color: #f1f5f9;
+      margin-bottom: 10px;
+      padding: 10px 15px;
+      border-left: 4px solid #60a5fa;
+      border-radius: 5px;
+    }
+
+    .success-message {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-wrapper {
+        padding: 20px;
+      }
+
+      .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .buttons a {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .tab-link {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .top-tabs {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- ✅ Top Left Tabs -->
+    <div class="top-tabs">
+      <a href="/mainpage">🏠 Go to Home</a>
+      <a href="/bookmark.html">🔖 See Bookmarked Journals</a>
+      <a href="/delete_account" class="delete-account-tab">❌ Delete Account</a>
+
+    </div>
+
+    <!-- Header -->
+    <div class="profile-header">
+      <i class="fas fa-user-circle"></i>
+      <h1>Welcome, {{ user['username'] }}!</h1>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="profile-details">
+      <p><strong>First Name:</strong> {% if user['first_name'] %} {{ user['first_name'] }} {% else %} <span>&nbsp;</span> {% endif %}</p>
+      <p><strong>Last Name:</strong> {% if user['last_name'] %} {{ user['last_name'] }} {% else %} <span>&nbsp;</span> {% endif %}</p>
+      <p><strong>Profession:</strong> {% if user['profession'] %} {{ user['profession'] }} {% else %} <span>&nbsp;</span> {% endif %}</p>
+      <p><strong>District:</strong> {% if user['district'] %} {{ user['district'] }} {% else %} <span>&nbsp;</span> {% endif %}</p>
+      <p><strong>State:</strong> {% if user['state'] %} {{ user['state'] }} {% else %} <span>&nbsp;</span> {% endif %}</p>
+      <p><strong>Country:</strong> {% if user['country'] %} {{ user['country'] }} {% else %} <span>&nbsp;</span> {% endif %}</p>
+    </div>
+
+    {% if user['first_name'] and user['last_name'] and user['profession'] and user['district'] and user['state'] and user['country'] %}
+  <p class="success-message">✅ Profile Completed!</p>
+{% else %}
+  <p class="success-message" style="color: orange;">⚠️ Profile Incomplete – please complete your profile.</p>
+{% endif %}
+
+
+    <!-- Action Buttons -->
+<div class="buttons">
+  <a href="/complete_profile"
+     {% if user['first_name'] and user['last_name'] and user['profession'] and user['district'] and user['state'] and user['country'] %}
+     style="pointer-events: none; opacity: 0.6; cursor: not-allowed;"
+     {% endif %}>
+     Complete Your Profile
+  </a>
+  <a href="/update_profile">Update Profile</a>
+</div>
+
+
+    
+
+    <div class="tab-content" id="bookmarked-journals">
+      {% if bookmarks %}
+        <ul>
+          {% for bookmark in bookmarks %}
+            <li>{{ bookmark['journal_name'] }} - ISSN: {{ bookmark['issn'] }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No bookmarked journals.</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

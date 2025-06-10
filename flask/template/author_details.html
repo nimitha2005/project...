@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors - {{ paper.paper_title }}</title>
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            color: #1f2937;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .author-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .author {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 15px;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Authors for: {{ paper.paper_title }}</h1>
+
+    <div class="author-container">
+        {% if authors %}
+            {% for author in authors %}
+            <div class="author">
+                <p><span class="label">Name:</span> {{ author.name }}</p>
+                <p><span class="label">Affiliation:</span> {{ author.affiliation }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No authors found for this paper.</p>
+        {% endif %}
+        <a href="/papers" class="back-link">← Back to Published Papers</a>
+    </div>
+
+</body>
+</html>

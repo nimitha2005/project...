@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Journal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #b1d4e0, #d9d9d9);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #66b3ff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #66b3ff;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3385ff;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Journal</h2>
+        <form action="/addjournal" method="POST">
+            <label for="issn">ISSN (Required):</label>
+            <input type="text" id="issn" name="issn" required>
+
+            <label for="jname">Journal Name:</label>
+            <input type="text" id="jname" name="jname">
+
+            <label for="payment">Payment Status:</label>
+            <input type="text" id="payment" name="payment">
+
+            <label for="fee">Fee:</label>
+            <input type="text" id="fee" name="fee">
+
+            <label for="frequency">Frequency:</label>
+            <input type="text" id="frequency" name="frequency">
+
+            <label for="scopus_index">Scopus Index:</label>
+            <input type="text" id="scopus_index" name="scopus_index">
+
+            <label for="wos_index">WOS Index:</label>
+            <input type="text" id="wos_index" name="wos_index">
+
+            <label for="quality">Quality:</label>
+            <input type="text" id="quality" name="quality">
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country">
+
+            <label for="impact_factor">Impact Factor:</label>
+            <input type="number" step="0.01" id="impact_factor" name="impact_factor">
+
+            <button type="submit">Add Journal</button>
+        </form>
+    </div>
+</body>
+</html>

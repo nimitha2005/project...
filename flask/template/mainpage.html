@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Journal Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- ✅ Font Awesome 6 (Latest CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #c6d5e6, #dbeafe); /* Updated background gradient */
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      background-color: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #60a5fa;
+      transform: translateY(-3px);
+    }
+
+    .nav-links a.active {
+      color: #60a5fa;
+      font-weight: 600;
+    }
+
+    .user-profile {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .user-profile i {
+      font-size: 20px;
+      color: #ffffff;
+    }
+
+    .user-profile:hover {
+      color: #60a5fa;
+    }
+
+    /* Content styling */
+    .content {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    .content h1 {
+      font-size: 4em; /* Larger font size for emphasis */
+      color: #1e3a8a; /* Primary color */
+      margin-bottom: 20px;
+      font-weight: 700;
+      background: linear-gradient(to right, #60a5fa, #3b82f6); /* Gradient color */
+      -webkit-background-clip: text;
+      color: transparent;
+      text-transform: uppercase; /* Uppercase text for more impact */
+      letter-spacing: 2px; /* Added spacing between letters */
+      animation: fadeIn 2s ease-out; /* Fade-in animation */
+    }
+
+    .content h1:hover {
+      color: #ffffff;
+      background: linear-gradient(to right, #60a5fa, #3b82f6); /* On hover, make the text gradient */
+      -webkit-background-clip: text;
+      color: transparent;
+      transform: scale(1.05); /* Slight zoom effect on hover */
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content p {
+      font-size: 1.2em;
+      color: #4a5568;
+      margin-bottom: 40px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 500;
+    }
+
+    .button-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      justify-items: center;
+      align-items: center;
+      grid-template-rows: repeat(3, auto);
+      margin-top: 40px;
+    }
+
+    .button-container button {
+      background: linear-gradient(to right, #4e65c2, #257edd); /* Updated button gradient */
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.4s ease, transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    .button-container button:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-container button:active {
+      transform: scale(1) translateY(0);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Chatbot Sidebar */
+    .chatbot-sidebar {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #0b1434;
+      color: white;
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: width 0.3s, background-color 0.3s ease;
+      z-index: 999;
+    }
+
+    .chatbot-sidebar:hover {
+      width: 200px;
+      background-color: #0c1f3e;
+    }
+
+    .chatbot-sidebar i {
+      font-size: 30px;
+      transition: font-size 0.3s;
+    }
+
+    .chatbot-sidebar span {
+      font-size: 18px;
+      margin-left: 15px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .chatbot-sidebar:hover span {
+      opacity: 1;
+    }
+
+    @media screen and (max-width: 600px) {
+      .nav-links a {
+        margin: 0 10px;
+        font-size: 16px;
+      }
+
+      .content h1 {
+        font-size: 2.4em;
+      }
+
+      .button-container button {
+        width: 80%;
+        padding: 12px;
+      }
+
+      .chatbot-sidebar {
+        width: 60px;
+        height: 60px;
+      }
+
+      .chatbot-sidebar:hover {
+        width: 150px;
+      }
+
+      .chatbot-sidebar i {
+        font-size: 25px;
+      }
+
+      .chatbot-sidebar span {
+        font-size: 14px;
+        margin-left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="nav-links">
+      <a href="/" class="active">Home</a>
+      <a href="/all_journals">List Publications</a>
+      <a href="/publishers">Publisher</a>
+    </div>
+
+    {% if username %}
+    <div style="display: flex; flex-direction: column; align-items: flex-end; color: white;">
+      <a href="/profile" style="display: flex; align-items: center; color: white; text-decoration: none; margin-bottom: 6px;">
+        <i class="fas fa-user-circle" style="margin-right: 6px;"></i>
+        <strong>{{ username }}</strong>
+      </a>
+      <a href="/logout" style="color: white; font-size: 14px; text-decoration: none; display: flex; align-items: center;">
+        <i class="fas fa-sign-out-alt" style="margin-right: 5px;"></i> Logout
+      </a>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <h1>Find the Best Journals for Your Research</h1>
+    <p>Browse through various journals and select the ones that best fit your research needs. Discover top publications, publishers, and trending journals.</p>
+
+    <div class="button-container">
+      <button onclick="window.location.href='/all_journals'">All Journal List</button>
+      <button onclick="window.location.href='/selectjournal'">Select Your Type</button>
+      <button onclick="window.location.href='/publishers'">See Publisher Details</button>
+      <button onclick="window.location.href='/papers'">Published papers</button>
+      <button onclick="window.location.href='/most'">Most Booked Journals</button>
+    </div>
+  </div>
+
+  <!-- Chatbot Sidebar -->
+  <div class="chatbot-sidebar" onclick="window.location.href='/chatbot'">
+    <i class="fas fa-comments"></i>
+    <span>Chat with Us</span>
+  </div>
+
+</body>
+</html>
